@@ -40,8 +40,12 @@ public class DemoApplication {
 			});
 
 			//employeeRepository.saveAll(employeeList);
+
 			EmployeeIdCard employeeIdCard = new EmployeeIdCard("2023010001", employeeList.get(0));
 			employeeIdCardRepository.save(employeeIdCard);
+
+			employeeRepository.save(employeeList.get(1));
+
 
 		};
 	}
