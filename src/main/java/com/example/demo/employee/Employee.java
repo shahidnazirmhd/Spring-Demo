@@ -39,6 +39,9 @@ public class Employee {
     @Column(nullable = false, name = "gender")
     private Gender gender;
 
+    @OneToOne(mappedBy = "employee", orphanRemoval = true)
+    private EmployeeIdCard employeeIdCard;
+
     public Employee(String firstName, String lastName, String email, Long mobileNo, Integer age, Gender gender) {
         this.firstName = firstName;
         this.lastName = lastName;

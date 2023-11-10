@@ -1,8 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.employee.Employee;
-import com.example.demo.employee.EmployeeRepository;
-import com.example.demo.employee.Gender;
+import com.example.demo.employee.*;
 import com.github.javafaker.Faker;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -23,7 +21,10 @@ public class DemoApplication {
 
 	//Initially add employees (Data) to DB
 	@Bean
-	CommandLineRunner commandLineRunner(EmployeeRepository employeeRepository) {
+	CommandLineRunner commandLineRunner(
+			EmployeeRepository employeeRepository,
+			EmployeeIdCardRepository employeeIdCardRepository
+	) {
 		return args -> {
 			List<Employee> employeeList = new ArrayList<>();
 			IntStream.range(0,10).forEach(r->{
@@ -32,13 +33,15 @@ public class DemoApplication {
 				String lName = fake.name().lastName();
 				String email = String.format("%s.%s@example.com", fName, lName);
 				Integer age  = fake.number().numberBetween(17, 55);
-				Long mobileNo = fake.number().randomNumber(10, true);
+				Long mobileNo = fake.number().randomNumber(10, false);
 				Gender gender = fake.options().option(Gender.class);
 				Employee employee = new Employee(fName,lName,email,mobileNo,age, gender);
 				employeeList.add(employee);
 			});
 
-			employeeRepository.saveAll(employeeList);
+			//employeeRepository.saveAll(employeeList);
+			EmployeeIdCard employeeIdCard = new EmployeeIdCard("2023010001", employeeList.get(0));
+			employeeIdCardRepository.save(employeeIdCard);
 
 		};
 	}
