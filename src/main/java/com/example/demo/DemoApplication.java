@@ -21,6 +21,7 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
+	//Initially add employees (Data) to DB
 	@Bean
 	CommandLineRunner commandLineRunner(EmployeeRepository employeeRepository) {
 		return args -> {
