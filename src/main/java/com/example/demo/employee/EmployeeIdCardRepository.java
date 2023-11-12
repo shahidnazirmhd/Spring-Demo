@@ -1,7 +1,7 @@
 package com.example.demo.employee;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface EmployeeIdCardRepository extends CrudRepository<EmployeeIdCard, Long> {
+public interface EmployeeIdCardRepository extends JpaRepository<EmployeeIdCard, Long> {
 
 }

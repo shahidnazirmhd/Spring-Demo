@@ -7,9 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-@ToString
-@Getter
-@Setter
+
 @EqualsAndHashCode
 @NoArgsConstructor
 @Entity(name = "Employee")
@@ -28,7 +26,7 @@ public class Employee {
     @Column(name = "last_name", nullable = false, columnDefinition = "TEXT")
     private String lastName;
     @Email
-    @Column(name = "email", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "email", nullable = false, length = 100)
     private String email;
     @Column(name = "mobile_no", nullable = false)
     private Long mobileNo;
@@ -39,7 +37,7 @@ public class Employee {
     @Column(nullable = false, name = "gender")
     private Gender gender;
 
-    @OneToOne(mappedBy = "employee", orphanRemoval = true)
+    @OneToOne(mappedBy = "employee", orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private EmployeeIdCard employeeIdCard;
 
     public Employee(String firstName, String lastName, String email, Long mobileNo, Integer age, Gender gender) {
@@ -49,5 +47,50 @@ public class Employee {
         this.mobileNo = mobileNo;
         this.age = age;
         this.gender = gender;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Long getMobileNo() {
+        return mobileNo;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setEmployeeIdCard(EmployeeIdCard employeeIdCard) {
+        this.employeeIdCard = employeeIdCard;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", mobileNo=" + mobileNo +
+                ", age=" + age +
+                ", gender=" + gender +
+                '}';
     }
 }

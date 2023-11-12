@@ -16,7 +16,7 @@ public class EmployeeService {
     }
 
     public Employee getEmployeeById(Long empId) {
-        return employeeRepository.findById(empId).orElseThrow(() -> new EmployeeNotFoundException( "Student with id " + empId + " does not exists"));
+        return employeeRepository.findById(empId).orElseThrow(() -> new EmployeeNotFoundException( "Employee with id " + empId + " does not exists"));
     }
 
     public void addEmployee(Employee employee) {

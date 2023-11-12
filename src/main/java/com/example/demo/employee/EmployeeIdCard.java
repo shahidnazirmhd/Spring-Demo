@@ -3,9 +3,7 @@ package com.example.demo.employee;
 import jakarta.persistence.*;
 import lombok.*;
 
-@ToString
-@Getter
-@Setter
+
 @EqualsAndHashCode
 @NoArgsConstructor
 @Entity(name = "EmployeeIdCard")
@@ -18,7 +16,7 @@ public class EmployeeIdCard {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_card_id_sequence")
     @Column(name = "id", updatable = false)
     private Long id;
-    @Column(name = "card_number", nullable = false, length = 15)
+    @Column(name = "card_number", nullable = false, length = 14)
     private String cardNumber;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "employee_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "employee_id_fk"))
@@ -27,5 +25,22 @@ public class EmployeeIdCard {
     public EmployeeIdCard(String cardNumber, Employee employee) {
         this.cardNumber = cardNumber;
         this.employee = employee;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "EmployeeIdCard{" +
+                "id=" + id +
+                ", cardNumber='" + cardNumber + '\'' +
+                ", employee=" + employee +
+                '}';
     }
 }
