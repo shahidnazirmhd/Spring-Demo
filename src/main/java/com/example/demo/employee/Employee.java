@@ -12,7 +12,8 @@ import lombok.*;
 @NoArgsConstructor
 @Entity(name = "Employee")
 @Table(name = "employee", uniqueConstraints = {
-        @UniqueConstraint(name = "employee_email_unique", columnNames = "email")
+        @UniqueConstraint(name = "employee_email_unique", columnNames = "email"),
+        @UniqueConstraint(name = "employee_mobile_no_unique", columnNames = "mobile_no")
 })
 public class Employee {
     @Id
@@ -75,6 +76,14 @@ public class Employee {
 
     public Gender getGender() {
         return gender;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setMobileNo(Long mobileNo) {
+        this.mobileNo = mobileNo;
     }
 
     public void setEmployeeIdCard(EmployeeIdCard employeeIdCard) {
