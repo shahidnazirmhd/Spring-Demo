@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -29,6 +30,7 @@ public class EmployeeService {
     }
 
     public void updateEmployeeById(Long empId, Employee emp) {
-
+        Optional.ofNullable(emp.getEmail()).ifPresent(email -> employeeRepository.selectExistsEmail(empId, email).ifPresentOrElse(e -> { throw new EmployeeNotFoundException( "Email Already Exist");},
+                () -> {employeeRepository.updateEmployeeEmail(empId, emp.getEmail());}));
     }
 }
